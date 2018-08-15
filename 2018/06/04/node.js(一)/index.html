@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LCW blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Node.js是什么 Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.   Node.js不是一门语言 Node.js不是库、不是框架 Node.js是一个JavaScript运行环境 Node.js可以解析和执行JavaScript代码 Node.js可以让JavaScript代码完全脱离浏览器运行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node.js(一)">
+<meta property="og:url" content="http://yoursite.com/2018/06/04/node.js(一)/index.html">
+<meta property="og:site_name" content="LCW blog">
+<meta property="og:description" content="Node.js是什么 Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.   Node.js不是一门语言 Node.js不是库、不是框架 Node.js是一个JavaScript运行环境 Node.js可以解析和执行JavaScript代码 Node.js可以让JavaScript代码完全脱离浏览器运行">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-04T15:02:49.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node.js(一)">
+<meta name="twitter:description" content="Node.js是什么 Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine.   Node.js不是一门语言 Node.js不是库、不是框架 Node.js是一个JavaScript运行环境 Node.js可以解析和执行JavaScript代码 Node.js可以让JavaScript代码完全脱离浏览器运行">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/04/node.js(一)/"/>
+
+
+
+
+
+  <title>node.js(一) | LCW blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://953950350.github.io/" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LCW blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/node.js(一)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李成文">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCW blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">node.js(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T00:00:00+08:00">
+                2018-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/node-js学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">node.js学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Node-js是什么"><a href="#Node-js是什么" class="headerlink" title="Node.js是什么"></a>Node.js是什么</h3><ul>
+<li><p>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine. </p>
+<ul>
+<li>Node.js不是一门语言</li>
+<li>Node.js不是库、不是框架</li>
+<li>Node.js是一个JavaScript运行环境</li>
+<li>Node.js可以解析和执行JavaScript代码</li>
+<li>Node.js可以让JavaScript代码完全脱离浏览器运行</li>
+</ul>
+</li>
+<li><p>浏览器中的JavaScript</p>
+<ul>
+<li><p>ECMAScript</p>
+<ul>
+<li>基本语法</li>
+<li>语句</li>
+<li>函数</li>
+<li>对象</li>
+</ul>
+</li>
+<li><p>BOM</p>
+</li>
+<li>DOM</li>
+</ul>
+</li>
+<li><p>Node.js中的JavaScript</p>
+<ul>
+<li>没有BOM、DOM</li>
+<li>ECMAScript</li>
+<li><p>在Node这个JavaScript执行环境中为JavaScript提供了一些服务器级别的操作API</p>
+<ul>
+<li>例如文件的读写</li>
+<li>网络服务的构建</li>
+<li>网络通信</li>
+<li>http服务器</li>
+<li>等处理。。。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>构建在Chrome的V8引擎之上</p>
+<ul>
+<li>代码只是具有特定格式的字符串</li>
+<li>引擎可以认识它，引擎可以去解析和执行代码</li>
+<li>Node.js的作者把Google Chrome中的V8引擎移植出来，开发了一个独立的JavaScript运行环境</li>
+</ul>
+</li>
+<li><p>Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.</p>
+<ul>
+<li>event-driven事件驱动</li>
+<li>non-blocking I/O model 非阻塞模型（异步）</li>
+<li>lightweight and efficient 轻量和高效</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</p>
+<ul>
+<li>npm 是世界上最大的开源库生态系统</li>
+<li>绝大多数JavaScript相关的包都存放在npm上，可以更方便的去下载使用</li>
+<li><code>npm install jQuery</code></li>
+</ul>
+</li>
+<li><p>Node.js一些资源</p>
+<ul>
+<li>《深入浅出Node.js》</li>
+<li>《Node.js权威指南》</li>
+<li>JavaScript标准参考教程（alpha）：<a href="http://javascript.ruanyifeng.com/nodejs/basic.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/nodejs/basic.html</a></li>
+<li>Node入门：<a href="http://www.nodebeginner.org/index-zh-cn.html" target="_blank" rel="noopener">http://www.nodebeginner.org/index-zh-cn.html</a></li>
+<li>官方API文档：<a href="http://node.js.org/dist/latest-v6.x/docs/api" target="_blank" rel="noopener">http://node.js.org/dist/latest-v6.x/docs/api</a></li>
+<li>中文文档：<a href="http://www.nodeclass.com/api/node.html" target="_blank" rel="noopener">http://www.nodeclass.com/api/node.html</a></li>
+<li>CNODE社区：<a href="http://cnode.js.org" target="_blank" rel="noopener">http://cnode.js.org</a></li>
+<li>CNODE-新手入门：<a href="http://cnodejs.org/getstart" target="_blank" rel="noopener">http://cnodejs.org/getstart</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="学习node的目的"><a href="#学习node的目的" class="headerlink" title="学习node的目的"></a>学习node的目的</h3><ul>
+<li><p>B/S编程模型</p>
+<ul>
+<li>Browser-Server</li>
+<li>back-end</li>
+<li>任何服务器技术这种BS编程模型都一样，和语言无关</li>
+<li>node只是学习BS编程模型的一个工具</li>
+</ul>
+</li>
+<li><p>模块化编程</p>
+<ul>
+<li>RequireJS</li>
+<li>SeaJS</li>
+<li>在Node中可以引用加载JavaScript脚本文件</li>
+</ul>
+</li>
+<li><p>Node常用API</p>
+</li>
+<li><p>异步编程</p>
+<ul>
+<li>回调函数</li>
+<li>promise</li>
+<li>async</li>
+<li>generator</li>
+</ul>
+</li>
+<li><p>Express web开发框架</p>
+</li>
+<li>ECMAScript6</li>
+</ul>
+<h3 id="初步体验node-js"><a href="#初步体验node-js" class="headerlink" title="初步体验node.js"></a>初步体验node.js</h3><ol>
+<li><p>Hello World</p>
+<ul>
+<li>解析执行JavaScript</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>使用node运行js文件的步骤</p>
+<ol>
+<li>创建编写JavaScript脚本文件</li>
+<li>打开终端，定位到脚本文件所属目录</li>
+<li>输入<code>node 文件名</code>执行对应的文件<br>注意：文件名不用使用<code>node.js</code>来命名，最好不要使用中文名。</li>
+</ol>
+<ul>
+<li>读写文件</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*fs是filesystem的简写，就是文件系统的意思</span></span><br><span class="line"><span class="comment"> 在node中如果想要进行文件操作，就必须引入fs这个核心模块</span></span><br><span class="line"><span class="comment"> 在fs这个核心模块中提供了所有的文件操作相关的API</span></span><br><span class="line"><span class="comment"> 例如：fs.redFile就是用来读取文件</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//1.使用require方法加载fs核心模块</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2.读取文件</span></span><br><span class="line"><span class="comment"> 第一个参数是读取文件的路径</span></span><br><span class="line"><span class="comment"> 第二个参数是一个回调函数</span></span><br><span class="line"><span class="comment"> 参数：data error</span></span><br><span class="line"><span class="comment"> 读取成功</span></span><br><span class="line"><span class="comment"> data  是数据</span></span><br><span class="line"><span class="comment"> error null</span></span><br><span class="line"><span class="comment"> 读取失败</span></span><br><span class="line"><span class="comment"> data 是undefined</span></span><br><span class="line"><span class="comment"> error是错误对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">fs.readFile(<span class="string">'./data/hello.txt'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">error,data</span>) </span>&#123;</span><br><span class="line"> <span class="comment">//&lt;Buffer 68 65 6c 6c 6f 20 6e 6f 64 65 6a 73&gt;</span></span><br><span class="line"> <span class="comment">//文件中储存的是二级制数据 0 1</span></span><br><span class="line"> <span class="comment">//这里把二进制数据转换为了16机制</span></span><br><span class="line"> <span class="comment">//我们可以通过toString方法把其转为我能认识的字符</span></span><br><span class="line"> <span class="keyword">if</span>(error) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'文件读取失败'</span>);</span><br><span class="line"> &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(data.toString());</span><br><span class="line"> &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//写文件</span></span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//第一个参数：文件路径</span></span><br><span class="line"><span class="comment">//第二个参数：文件内容</span></span><br><span class="line"><span class="comment">//第三个参数：回调函数</span></span><br><span class="line"><span class="comment">//接受一个参数 error</span></span><br><span class="line"><span class="comment">//写入成功error是null 写入失败error是错误对象</span></span><br><span class="line">fs.writeFile(<span class="string">'./data/你好.md'</span>,<span class="string">'大家好，我是nodejs'</span>,<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'文件写入失败'</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'文件写入成功'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>http</li>
+</ul>
+<p>最简单的http服务：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//node中专门提供了一个核心模块：http</span></span><br><span class="line"><span class="comment">//http 这个模块的职责就是帮你创建编写服务器</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 加载http核心模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 使用http.createServer()方法创建一个web服务器</span></span><br><span class="line"><span class="comment">//       返回一个Server 实例</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 使用服务器</span></span><br><span class="line"><span class="comment">//    服务器是提供对数据的服务的</span></span><br><span class="line"><span class="comment">//     发请求——&gt;接受请求——&gt;处理请求——&gt;发送响应</span></span><br><span class="line"><span class="comment">//    注册request请求事件，当客户端请求过来，就会自动触发服务器的request请求事件，然后执行第二个参数：回调处理函数</span></span><br><span class="line">server.on(<span class="string">'request'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'收到客户端的请求了'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 绑定端口号，启动服务器</span></span><br><span class="line">server.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'服务器启动成功。'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="node中的JS模块系统"><a href="#node中的JS模块系统" class="headerlink" title="node中的JS模块系统"></a>node中的JS模块系统</h3><ol>
+<li><p>require的作用</p>
+<ul>
+<li>require是一个方法，它的作用是用来加载模块的</li>
+<li>代码执行时碰到这个方法会去执行模块文件中的代码，然后再执行之后的代码。</li>
+<li>require方法还有另一个作用，可以实现模块之间的通信。</li>
+</ul>
+</li>
+<li><p>node中，模块有三种：</p>
+<ul>
+<li>具名的核心模块。例如：fs、http</li>
+<li><p>用户自己编写的文件模块。加载自己的文件模块时注意：</p>
+<ul>
+<li>相对路径必须加<code>./</code></li>
+<li>可以省略后缀名</li>
+<li>相对路径中<code>./</code>不能省略，否则会报错</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在node中，没有全局作用域，只有模块作用域</p>
+<ul>
+<li>模块内部和外部不能互相访问，默认都是封闭的。</li>
+<li>不同模块之间无法访问到对方的方法和变量，只是简单执行了模块里面的代码</li>
+</ul>
+</li>
+<li><p>模块之间的通信：</p>
+<ul>
+<li>require方法还能够拿到被加载文件模块导出的接口对象</li>
+<li>在每个文件模块都提供一个对象：<code>exports</code></li>
+<li><code>exports</code>默认是一个空对象</li>
+<li>我们只需要把需要被外部访问的成员挂载在exports对象中，就可以了</li>
+<li>require对象的返回值就是被加载模块的exports对象</li>
+</ul>
+</li>
+<li><p>content-type</p>
+<ul>
+<li>在服务端发送给客户端的数据默认是utf8编码的，但是浏览器不知道内容是utf8编码的内容。</li>
+<li>浏览器在不知道服务器响应内容的编码的情况下会按照当前操作系统默认编码去解析。中文操作系统默认是gbk，所以在设置编码格式的情况下中文会乱码</li>
+<li>解决办法就是正确的告诉浏览器服务器发送给你的数据是什么编码的。</li>
+<li>在http协议中，Content-type就是用来告诉浏览器我发送的数据是什么类型</li>
+<li><code>res.setHeader(&quot;Content-Type&quot;,&#39;text/plain: charset=utf-8&#39;)</code>可以设置响应体的数据类型。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="李成文 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="李成文 Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/02/ajax异步上传文件/" rel="next" title="ajax异步上传文件">
+                <i class="fa fa-chevron-left"></i> ajax异步上传文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/20/node.js(二)/" rel="prev" title="node.js(二)">
+                node.js(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="李成文" />
+          <p class="site-author-name" itemprop="name">李成文</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/953950350" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="953950350@qq.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      E-mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-js是什么"><span class="nav-number">1.</span> <span class="nav-text">Node.js是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#学习node的目的"><span class="nav-number">2.</span> <span class="nav-text">学习node的目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初步体验node-js"><span class="nav-number">3.</span> <span class="nav-text">初步体验node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#node中的JS模块系统"><span class="nav-number">4.</span> <span class="nav-text">node中的JS模块系统</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李成文</span>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="http://7u2ss1.com1.z0.glb.clouddn.com/love.js"></script>
+</body>
+</html>

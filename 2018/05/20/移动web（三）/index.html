@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LCW blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="响应式布局基本知识： 媒体查询：响应式布局的基本原理就是使用媒体查询来针对不同的屏幕区间设置不同的布局和样式。下面是一个简单的媒体查询的例子：12345678910111213141516171819202122232425262728@media screen and (max-width: 768px) &amp;#123;            /*1.在超小屏设备的时候  768px以下  当前容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动web（三）响应式布局">
+<meta property="og:url" content="http://yoursite.com/2018/05/20/移动web（三）/index.html">
+<meta property="og:site_name" content="LCW blog">
+<meta property="og:description" content="响应式布局基本知识： 媒体查询：响应式布局的基本原理就是使用媒体查询来针对不同的屏幕区间设置不同的布局和样式。下面是一个简单的媒体查询的例子：12345678910111213141516171819202122232425262728@media screen and (max-width: 768px) &amp;#123;            /*1.在超小屏设备的时候  768px以下  当前容">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-20T15:54:16.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动web（三）响应式布局">
+<meta name="twitter:description" content="响应式布局基本知识： 媒体查询：响应式布局的基本原理就是使用媒体查询来针对不同的屏幕区间设置不同的布局和样式。下面是一个简单的媒体查询的例子：12345678910111213141516171819202122232425262728@media screen and (max-width: 768px) &amp;#123;            /*1.在超小屏设备的时候  768px以下  当前容">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/20/移动web（三）/"/>
+
+
+
+
+
+  <title>移动web（三）响应式布局 | LCW blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://953950350.github.io/" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LCW blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/20/移动web（三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李成文">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCW blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">移动web（三）响应式布局</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T19:06:00+08:00">
+                2018-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/移动web/" itemprop="url" rel="index">
+                    <span itemprop="name">移动web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="响应式布局基本知识："><a href="#响应式布局基本知识：" class="headerlink" title="响应式布局基本知识："></a>响应式布局基本知识：</h3><ol>
+<li>媒体查询：<br>响应式布局的基本原理就是使用媒体查询来针对不同的屏幕区间设置不同的布局和样式。<br>下面是一个简单的媒体查询的例子：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (max-width: 768px) &#123;</span><br><span class="line">            /*1.在超小屏设备的时候  768px以下  当前容器的宽度为100%  背景为蓝色*/</span><br><span class="line">            .container &#123;</span><br><span class="line">                width: 100%;</span><br><span class="line">                background-color: blue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        @media screen and (min-width: 768px) and (max-width: 992px) &#123;</span><br><span class="line">            /*2.在小屏设备的时候 768px—992px  当前容器的宽度750px  背景为绿色*/</span><br><span class="line">            .container &#123;</span><br><span class="line">                width: 750px;</span><br><span class="line">                background: green;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        @media screen and (min-width: 992px) and (max-width: 1200px) &#123;</span><br><span class="line">            /*3.在中屏设备的时候  992px-1200px  当前容器的宽度为970px 背景为红色*/</span><br><span class="line">            .container &#123;</span><br><span class="line">                width: 970px;</span><br><span class="line">                background: red;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        @media screen and (min-width: 1200px) &#123;</span><br><span class="line">            /*4.在大屏设备的时候 1200px以上  当前容器宽度1170px 背景为黄色*/</span><br><span class="line">            .container &#123;</span><br><span class="line">                width: 1170px;</span><br><span class="line">                background: yellow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>当屏幕满足条件时，<code>@media</code>内的样式就会覆盖之前的样式。</p>
+<h3 id="Boostrap的基本知识："><a href="#Boostrap的基本知识：" class="headerlink" title="Boostrap的基本知识："></a>Boostrap的基本知识：</h3><ol>
+<li><p>基本模板：<br>要使用boostrap那么就必须要使用boostrap的基本模板，下面的代码介绍了boostrap基本模板各个语句的作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--h5文档申明--&gt;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;!--文档语言申明  en zh-CN zh-tw --&gt;</span><br><span class="line">&lt;html lang=&quot;zh-CN&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;!--文档编码申明--&gt;</span><br><span class="line">    &lt;meta charset=&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;!--要求当前网页使用浏览器最高版本的内核来渲染--&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;!--视口的设置：视口的宽度和设备一致，默认的缩放比例和PC端一致，用户不能自行缩放--&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, user-scalable=0&quot;&gt;</span><br><span class="line">    &lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;</span><br><span class="line">    &lt;!-- 作用：优先加载和浏览器解释 --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;title&gt;title&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Bootstrap 核心样式--&gt;</span><br><span class="line">    &lt;link href=&quot;../lib/bootstrap/css/bootstrap.css&quot; rel=&quot;stylesheet&quot;&gt;</span><br><span class="line">    &lt;!-- html5shiv 和  respond 分别用来解决IE8版本浏览器不支持 H5标签和媒体查询的  不兼容问题--&gt;</span><br><span class="line">    &lt;!-- HTML5 shiv and Respond.js for IE8 support of HTML5 elements and media queries --&gt;</span><br><span class="line">    &lt;!-- 警告：不能以file形式打开，本地打开。最好http://打开 --&gt;</span><br><span class="line">    &lt;!-- WARNING: Respond.js doesn&apos;t work if you view the page via file:// --&gt;</span><br><span class="line">    &lt;!-- 在 IE 9 一下引入--&gt;</span><br><span class="line">    &lt;!--[if lt IE 9]&gt;</span><br><span class="line">    &lt;script src=&quot;../lib/html5shiv/html5shiv.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;../lib/respond/respond.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;![endif]--&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;!--TODO--&gt;</span><br><span class="line">&lt;!-- Button trigger modal --&gt;</span><br><span class="line">&lt;button type=&quot;button&quot; class=&quot;btn btn-primary btn-lg&quot; data-toggle=&quot;modal&quot; data-target=&quot;#myModal&quot;&gt;</span><br><span class="line">    Launch demo modal</span><br><span class="line">&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Modal --&gt;</span><br><span class="line">&lt;div class=&quot;modal fade&quot; id=&quot;myModal&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-labelledby=&quot;myModalLabel&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;modal-dialog&quot; role=&quot;document&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;modal-content&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;modal-header&quot;&gt;</span><br><span class="line">                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;</span><br><span class="line">                &lt;h4 class=&quot;modal-title&quot; id=&quot;myModalLabel&quot;&gt;Modal title&lt;/h4&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;modal-body&quot;&gt;</span><br><span class="line">                ...</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">            &lt;div class=&quot;modal-footer&quot;&gt;</span><br><span class="line">                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;</span><br><span class="line">                &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;Save changes&lt;/button&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;!-- bootstrap依赖jquery--&gt;</span><br><span class="line">&lt;!-- jQuery (necessary for Bootstrap&apos;s JavaScript plugins) --&gt;</span><br><span class="line">&lt;script src=&quot;../lib/jquery/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;!-- bootstrap js 核心文件--&gt;</span><br><span class="line">&lt;!-- Include all compiled plugins (below), or include individual files as needed --&gt;</span><br><span class="line">&lt;script src=&quot;../lib/bootstrap/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>normalize&amp;reset的区别：</p>
+<blockquote>
+<p>在写页面之前我们都会去重置一些浏览器本身的样式，那么boostrap使用的normalize和我们自己写的reset.ss有什么区别呢？</p>
+<ul>
+<li>共同点：normalize和reset都是为了重置样式库，来增强浏览器的表现一致性</li>
+<li>不同点 ：我们在写样式时reset.css中通常都会设置list-style:none，因为很多时候我们并不需要无序列表的初始样式。但是normalize.css不会去重置这个样式，原因是这个样式本身已经是在每个浏览器都表现一致的样式了。<br>总结：这两者都是为了增强浏览器的表现一致性，但是normalize不会重置已经一致的元素。</li>
+</ul>
+</blockquote>
+</li>
+<li>boostrap的基本样式——container：<blockquote>
+<ul>
+<li>boostrap中提供的响应式布局的容器就是container，只要给容器加上container的类名那么这个容器就是响应式容器。</li>
+<li>boostrap中流式容器的类名为：container-fluid</li>
+</ul>
+</blockquote>
+</li>
+<li><p>栅格系统：</p>
+<blockquote>
+<ul>
+<li>栅格系统其实就是行和列的布局，网格状布局</li>
+<li>行：row，必须放在<code>.container</code>或者<code>.container-fluid</code>容器内，<code>.container</code>默认会有15px的左右间距，<code>.row</code>可以填充父容器的15px的左右间距，<code>.row</code>默认有<code>margin-left,margin-right -15px</code>的拉伸。</li>
+<li>列：<code>col-*-*</code> 这里*为不确定参数：<ul>
+<li>第一个*：屏幕的大小</li>
+<li>大屏设备：lg ——大屏设备以上生效包括本身</li>
+<li>中屏设备：md——中屏设备以上生效包含本身</li>
+<li>小屏设备：sm——小屏设备以上生效包含本身</li>
+<li>超小型设备：xs——超小型设备以上生效包含本身</li>
+<li>第二个*：每一行的等份数，默认分成12等份，数字代表的是占多少份。</li>
+</ul>
+</li>
+<li>栅格系统支持栅格嵌套，也就是说在一行中的一个列里面可以嵌套行，嵌套的行和外面的行遵循的规则是一样的，它里面的宽度是基于父容器的。</li>
+<li>列偏移：使用<code>col-xs-offset-1</code>可以使列进行偏移，里面也可以设置响应的屏幕，还有偏移的数量，这里数量是基于被分割的12等份。</li>
+<li>列排序：push往后推，pull是往前拉，例如<code>col-xs-push-9</code>就是往后推9个单位</li>
+<li>响应式工具：使用<code>hidden-*</code>可以设置容器在什么时候隐藏，<code>visible-*</code>设置容器在什么时候显示，而在其他时候都隐藏。推荐使用第一种。</li>
+</ul>
+</blockquote>
+</li>
+<li><p>自定义字体图标：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/*自定义字体图标*/</span><br><span class="line">/*1.通过@font-face定义自己的字体*/</span><br><span class="line">@font-face &#123;</span><br><span class="line">    /*2.申明自己的字体名称*/</span><br><span class="line">    font-family: &apos;wjs&apos;;</span><br><span class="line">    /*3.引入字体文件（约束某一段字符代码什么图案）*/</span><br><span class="line">    src:</span><br><span class="line">    url(../fonts/MiFie-Web-Font.svg) format(&apos;svg&apos;),</span><br><span class="line">    url(../fonts/MiFie-Web-Font.eot) format(&apos;embedded-opentype&apos;),</span><br><span class="line">    url(../fonts/MiFie-Web-Font.ttf) format(&apos;truetype&apos;),</span><br><span class="line">    url(../fonts/MiFie-Web-Font.woff) format(&apos;woff&apos;);</span><br><span class="line">&#125;</span><br><span class="line">/*4.使用类名和伪类让字体图标更好维护*/</span><br><span class="line">.wjs_icon&#123;</span><br><span class="line">    font-family: wjs;</span><br><span class="line">&#125;</span><br><span class="line">.wjs_icon_phone::before&#123;</span><br><span class="line">    content: &quot;\e908&quot;;</span><br><span class="line">&#125;</span><br><span class="line">.wjs_icon_tel::before&#123;</span><br><span class="line">    content: &quot;\e909&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="李成文 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="李成文 Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/19/移动web（二）/" rel="next" title="移动web（二）">
+                <i class="fa fa-chevron-left"></i> 移动web（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/22/第11章DOM扩展/" rel="prev" title="第十一章DOM扩展">
+                第十一章DOM扩展 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="李成文" />
+          <p class="site-author-name" itemprop="name">李成文</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/953950350" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="953950350@qq.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      E-mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#响应式布局基本知识："><span class="nav-number">1.</span> <span class="nav-text">响应式布局基本知识：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boostrap的基本知识："><span class="nav-number">2.</span> <span class="nav-text">Boostrap的基本知识：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李成文</span>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="http://7u2ss1.com1.z0.glb.clouddn.com/love.js"></script>
+</body>
+</html>

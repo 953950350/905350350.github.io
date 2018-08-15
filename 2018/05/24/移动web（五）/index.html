@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LCW blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="今日css部分的一些不熟练的知识点： 两栏自适应时要注意浮动元素优先。 box-shadow的参数问题： 参数1：x轴的偏移 参数2：y轴的偏移 参数3：阴影的模糊度 参数4：阴影的延伸 参数5：阴影的颜色 参数6：设置为inset时为内阴影   -of-type选择器和-child选择器 如p:first-of-type：找到p元素，通过p找到父元素，通过父元素找子元素中所有类型为p的元素，然后">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动web（五）">
+<meta property="og:url" content="http://yoursite.com/2018/05/24/移动web（五）/index.html">
+<meta property="og:site_name" content="LCW blog">
+<meta property="og:description" content="今日css部分的一些不熟练的知识点： 两栏自适应时要注意浮动元素优先。 box-shadow的参数问题： 参数1：x轴的偏移 参数2：y轴的偏移 参数3：阴影的模糊度 参数4：阴影的延伸 参数5：阴影的颜色 参数6：设置为inset时为内阴影   -of-type选择器和-child选择器 如p:first-of-type：找到p元素，通过p找到父元素，通过父元素找子元素中所有类型为p的元素，然后">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T15:50:55.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动web（五）">
+<meta name="twitter:description" content="今日css部分的一些不熟练的知识点： 两栏自适应时要注意浮动元素优先。 box-shadow的参数问题： 参数1：x轴的偏移 参数2：y轴的偏移 参数3：阴影的模糊度 参数4：阴影的延伸 参数5：阴影的颜色 参数6：设置为inset时为内阴影   -of-type选择器和-child选择器 如p:first-of-type：找到p元素，通过p找到父元素，通过父元素找子元素中所有类型为p的元素，然后">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/24/移动web（五）/"/>
+
+
+
+
+
+  <title>移动web（五） | LCW blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://953950350.github.io/" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LCW blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/24/移动web（五）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李成文">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCW blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">移动web（五）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T21:34:00+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/移动web/" itemprop="url" rel="index">
+                    <span itemprop="name">移动web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="今日css部分的一些不熟练的知识点："><a href="#今日css部分的一些不熟练的知识点：" class="headerlink" title="今日css部分的一些不熟练的知识点："></a>今日css部分的一些不熟练的知识点：</h2><ol>
+<li>两栏自适应时要注意浮动元素优先。</li>
+<li><code>box-shadow</code>的参数问题：<ul>
+<li>参数1：x轴的偏移</li>
+<li>参数2：y轴的偏移</li>
+<li>参数3：阴影的模糊度</li>
+<li>参数4：阴影的延伸</li>
+<li>参数5：阴影的颜色</li>
+<li>参数6：设置为inset时为内阴影</li>
+</ul>
+</li>
+<li><code>-of-type</code>选择器和<code>-child</code>选择器<ul>
+<li>如<code>p:first-of-type</code>：找到p元素，通过p找到父元素，通过父元素找子元素中所有类型为p的元素，然后再去找到第一个p</li>
+<li>如<code>p:first-child</code>：找到p元素，通过p元素找到所有的子元素，找到第一个子元素，匹配判断类型（如果不是p那么就是无效选择器）</li>
+</ul>
+</li>
+</ol>
+<h2 id="微金所项目总结："><a href="#微金所项目总结：" class="headerlink" title="微金所项目总结："></a>微金所项目总结：</h2><ul>
+<li>这次通过三天时间完成微金所项目，主要学习boostrap的基本使用方法，同时通过这个项目了解到了响应式开发原理和过程，掌握了插件使用的方法，复习了模板引擎artTemplate的使用，轮播图部分使用ajax完成了一个简单的交互功能。对boostrap中轮播图的改造使其满足我们的业务需求。</li>
+<li>本次项目中不足的地方：<ol>
+<li>css代码的质量还不是特别好，应该学习boostrap中模块化开发的思维，提高代码的复用率。</li>
+<li>需要提高开发的效率。</li>
+</ol>
+</li>
+</ul>
+<h2 id="Less的基本语法："><a href="#Less的基本语法：" class="headerlink" title="Less的基本语法："></a>Less的基本语法：</h2><ol>
+<li><p>变量<br>Less的自定义变量可以在全局样式中使用，变量使得样式的修改更加的简单</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/*注释：在css当中可以使用这种形式的注释，所以这种注释会出现在编译过后的css文件当中*/</span><br><span class="line">//注释：这种注释css不支持，所以不会编译在css文件中</span><br><span class="line">/*变量*/</span><br><span class="line">//1.必须有@前缀，@前缀相当于声明变量，：相当于等于，必须以分号结束；</span><br><span class="line">//2.不能以数字开头，不能包含特殊字符，变量名区分大小写</span><br><span class="line">@mainColor:#e92323;</span><br><span class="line">@className:box;</span><br><span class="line"></span><br><span class="line">div &#123;</span><br><span class="line">  background-color: @mainColor;</span><br><span class="line">&#125;</span><br><span class="line">a:hover &#123;</span><br><span class="line">  color: @mainColor;</span><br><span class="line">&#125;</span><br><span class="line">//变量用于字符串拼接时需要用&#123;&#125;把变量名包住</span><br><span class="line">.@&#123;className&#125; &#123;</span><br><span class="line">  color: @mainColor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Mixin混入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">@charset &quot;UTF-8&quot;;</span><br><span class="line">/*mixin是混入的意思*/</span><br><span class="line">/*mixin的作用是混合组合样式*/</span><br><span class="line">//.w50 &#123;</span><br><span class="line">//  width: 50%;</span><br><span class="line">//&#125;</span><br><span class="line">//.f_left &#123;</span><br><span class="line">//  float: left;</span><br><span class="line">//&#125;</span><br><span class="line">//.f_right &#123;</span><br><span class="line">//  float: right;</span><br><span class="line">//&#125;</span><br><span class="line">///*1.类混入*/</span><br><span class="line">//.w50-f_left &#123;</span><br><span class="line">//  .w50();</span><br><span class="line">//  .f_left();</span><br><span class="line">//&#125;</span><br><span class="line">/*2.函数的混入*/</span><br><span class="line">/*首先定义函数</span><br><span class="line">在less中定义的函数不会出现在css当中</span><br><span class="line">*/</span><br><span class="line">.w50() &#123;</span><br><span class="line">  width: 50%;</span><br><span class="line">&#125;</span><br><span class="line">//.f_left() &#123;</span><br><span class="line">//  float: left;</span><br><span class="line">//&#125;</span><br><span class="line">//.f_right() &#123;</span><br><span class="line">//  float: right;</span><br><span class="line">//&#125;</span><br><span class="line">//.w50-f_left &#123;</span><br><span class="line">//  .w50();</span><br><span class="line">//  .f_left();</span><br><span class="line">//&#125;</span><br><span class="line">/*</span><br><span class="line">less中的函数也是可以传参数的。</span><br><span class="line">1.如果定义了参数（没有设置默认值），调用的时候必须传参</span><br><span class="line">2.定义默认值的方法和定义变量值是一样的</span><br><span class="line">3.定义了参数（有默认值），参数可传可不传</span><br><span class="line">*/</span><br><span class="line">.f(@direction:left) &#123;</span><br><span class="line">  float:@direction;</span><br><span class="line">&#125;</span><br><span class="line">/*另外对于兼容浏览器利用less的函数也非常方便*/</span><br><span class="line">.borderRadius(@width:100px) &#123;</span><br><span class="line">  border-radius:@width;</span><br><span class="line">  -webkit-border-radius: @width;</span><br><span class="line">  -moz-border-radius: @width;</span><br><span class="line">  -o-border-radius: @width;</span><br><span class="line">  -ms-border-radius: @width;</span><br><span class="line">&#125;</span><br><span class="line">.w50-f_right &#123;</span><br><span class="line">  .w50();</span><br><span class="line">  .borderRadius(200px);</span><br><span class="line">  .f(right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>嵌套</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@charset &quot;UTF-8&quot;;</span><br><span class="line">.wjs_app &#123;</span><br><span class="line">/*利用less的嵌套可以编写高内聚的组件*/</span><br><span class="line">  display: block;</span><br><span class="line">  img &#123;</span><br><span class="line">    display: none;</span><br><span class="line">  &#125;</span><br><span class="line">  /*需要连接的情况使用&amp;符号*/</span><br><span class="line">  &amp;:hover &#123;</span><br><span class="line">    img &#123;</span><br><span class="line">      display: block;</span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 50%;</span><br><span class="line">      margin-left:-60px;</span><br><span class="line">      border: 1px solid #ccc;</span><br><span class="line">      border-top: none;</span><br><span class="line">      top:40px;</span><br><span class="line">      z-index: 100000;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  /*子代选择器直接使用&gt;*/</span><br><span class="line">  &gt;div &#123;</span><br><span class="line">    display: block;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>import导入<br>使用import可以载入其他的css文件，以此来完成模块化开发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;variables&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;mixin&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;topBar&quot;;</span><br><span class="line"></span><br><span class="line">@import &quot;banner&quot;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运算<br>less中支持运算符，这样可以简化我们在css中对数值的控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@num:5;</span><br><span class="line">ul &#123;</span><br><span class="line">  width: 100%*@num;</span><br><span class="line">  li &#123;</span><br><span class="line">    width: 100%/@num;</span><br><span class="line">    color: red+yellow+blue;</span><br><span class="line">    background: gray*3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数<br>less中同样有着许多内置函数，地址：<a href="http://www.1024i.com/demo/less/reference.html" target="_blank" rel="noopener">http://www.1024i.com/demo/less/reference.html</a></p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="李成文 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="李成文 Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/移动web（四）/" rel="next" title="移动web（四）使用boostrap组件构建页面">
+                <i class="fa fa-chevron-left"></i> 移动web（四）使用boostrap组件构建页面
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/25/mobile web（六）/" rel="prev" title="移动web(六)">
+                移动web(六) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="李成文" />
+          <p class="site-author-name" itemprop="name">李成文</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/953950350" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="953950350@qq.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      E-mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#今日css部分的一些不熟练的知识点："><span class="nav-number">1.</span> <span class="nav-text">今日css部分的一些不熟练的知识点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微金所项目总结："><span class="nav-number">2.</span> <span class="nav-text">微金所项目总结：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Less的基本语法："><span class="nav-number">3.</span> <span class="nav-text">Less的基本语法：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李成文</span>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="http://7u2ss1.com1.z0.glb.clouddn.com/love.js"></script>
+</body>
+</html>

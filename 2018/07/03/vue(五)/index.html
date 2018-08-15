@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LCW blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="在vue中监听数据变化的方法 watch属性。  这个属性可以监视实例对象中指定数据的变化，然后触发watch中对应的处理函数  这个属性是一个对象，里面的每个属性的key为实例对象中需要监视的数据的名称，值为数据改变时调用的处理函数。这个处理函数有两个参数第一个是newVal，第二个是oldVal可以在函数中使用这两个值  123456789101112 watch: &amp;#123;    &apos;fi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue.js(五)">
+<meta property="og:url" content="http://yoursite.com/2018/07/03/vue(五)/index.html">
+<meta property="og:site_name" content="LCW blog">
+<meta property="og:description" content="在vue中监听数据变化的方法 watch属性。  这个属性可以监视实例对象中指定数据的变化，然后触发watch中对应的处理函数  这个属性是一个对象，里面的每个属性的key为实例对象中需要监视的数据的名称，值为数据改变时调用的处理函数。这个处理函数有两个参数第一个是newVal，第二个是oldVal可以在函数中使用这两个值  123456789101112 watch: &amp;#123;    &apos;fi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-10T14:29:05.715Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue.js(五)">
+<meta name="twitter:description" content="在vue中监听数据变化的方法 watch属性。  这个属性可以监视实例对象中指定数据的变化，然后触发watch中对应的处理函数  这个属性是一个对象，里面的每个属性的key为实例对象中需要监视的数据的名称，值为数据改变时调用的处理函数。这个处理函数有两个参数第一个是newVal，第二个是oldVal可以在函数中使用这两个值  123456789101112 watch: &amp;#123;    &apos;fi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/03/vue(五)/"/>
+
+
+
+
+
+  <title>vue.js(五) | LCW blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://953950350.github.io/" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LCW blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/03/vue(五)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李成文">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCW blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue.js(五)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-03T00:00:00+08:00">
+                2018-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="在vue中监听数据变化的方法"><a href="#在vue中监听数据变化的方法" class="headerlink" title="在vue中监听数据变化的方法"></a>在vue中监听数据变化的方法</h3><ol>
+<li>watch属性。</li>
+</ol>
+<p>这个属性可以监视实例对象中指定数据的变化，然后触发<code>watch</code>中对应的处理函数</p>
+<ul>
+<li>这个属性是一个对象，里面的每个属性的<code>key</code>为实例对象中需要监视的数据的名称，值为数据改变时调用的处理函数。这个处理函数有两个参数第一个是<code>newVal</code>，第二个是<code>oldVal</code>可以在函数中使用这两个值</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> watch: &#123;</span><br><span class="line">    <span class="string">'firstName'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.fullName = newVal + <span class="string">'-'</span> + <span class="keyword">this</span>.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'lastName'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.fullName = <span class="keyword">this</span>.firstName + <span class="string">'-'</span> + <span class="keyword">this</span>.lastName</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">'$route.path'</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newVal, oldVal</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(newVal + <span class="string">'======='</span> + oldVal)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>computed计算属性</li>
+</ol>
+<p>在computed中，可以定义一些属性，这些属性叫做计算属性，计算属性的本质是一个方法，但是在<code>vue</code>的底层会执行这个方法，然后得到方法的返回值，然后这个属性就会被挂载到<code>vue</code>实例中去，我们就可以直接通过<code>vm.计算属性名</code>来访问这个计算属性的计算后的返回值了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    <span class="string">'fullName'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">'-'</span> + <span class="keyword">this</span>.lastName</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用vue实例的render方法渲染组件"><a href="#使用vue实例的render方法渲染组件" class="headerlink" title="使用vue实例的render方法渲染组件"></a>使用vue实例的render方法渲染组件</h3><ol>
+<li>render属性是一个方法，这个方法有一个参数<code>createElements</code>，这个参数是一个方法，调用它能够把指定的组件模板渲染为html结构。</li>
+<li>在render的函数中<code>return createElements(模板对象)</code>那么这个组件会替换页面中<code>el</code>指定的那个容器。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">render: <span class="function"><span class="keyword">function</span> (<span class="params">createElements</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> createElements(login)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="在webpack构建的项目中使用vue"><a href="#在webpack构建的项目中使用vue" class="headerlink" title="在webpack构建的项目中使用vue"></a>在webpack构建的项目中使用vue</h3><h4 id="webpack中导入vue和普通网页中使用script导入vue的区别"><a href="#webpack中导入vue和普通网页中使用script导入vue的区别" class="headerlink" title="webpack中导入vue和普通网页中使用script导入vue的区别"></a>webpack中导入vue和普通网页中使用script导入vue的区别</h4><ol>
+<li>在webpack中通过<code>import Vue from &#39;vue&#39;</code>导入的vue文件是<code>vue.runtime.common.js</code>而我们使用script导入的vue是<code>vue.js</code>文件。</li>
+<li>这个包中的vue模式为<code>runtime-only</code>的形式构建出来的包。</li>
+<li><p>我们在webpack中导入的vue文件是功能不全的文件，所以有些功能是无法使用的。如果想使用<code>vue.js</code>文件，可以做通过以下操作来实现：</p>
+<ul>
+<li>通过路径来导入vue文件<code>import Vue from &#39;../node_modules/vue/dist/vue.js&#39;</code></li>
+<li>直接修改vue包中<code>package.json</code>中的<code>main</code>属性，让<code>main</code>属性中的路径指向<code>vue.js</code></li>
+<li>在webpack的配置文件中添加以下属性：</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123;</span><br><span class="line">    alias: &#123; <span class="comment">// 修改vue导入的时候包的路径</span></span><br><span class="line">        <span class="string">"vue$"</span>: <span class="string">"vue/dist/vue.js"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="在vue中结合render函数渲染指定的组件到容器中"><a href="#在vue中结合render函数渲染指定的组件到容器中" class="headerlink" title="在vue中结合render函数渲染指定的组件到容器中"></a>在vue中结合render函数渲染指定的组件到容器中</h4><p>在<code>runtime-only</code>的条件下我们无法使用<code>components</code>去渲染组件，在这种模式下需要使用一种新的方法来渲染组件。</p>
+<ol>
+<li><p>首先我们需要为组件单独创建文件，文件的后缀名为<code>.vue</code>，文件的内容：</p>
+<ul>
+<li><code>&lt;template&gt;&lt;/template&gt;</code>这里添加html结构。</li>
+<li><code>&lt;script&gt;&lt;/script&gt;</code>这里添加<code>js</code>代码</li>
+<li><code>&lt;style&gt;&lt;/style&gt;</code>这里添加<code>css</code>代码</li>
+</ul>
+</li>
+<li><p>如果要使用<code>.vue</code>类型的文件，我们还需要安装第三方loader。<code>npm i vue-loader vue-template-compiler -D</code>,这里的<code>vue-loader</code>内部依赖于<code>vue-template-compiler</code>,所以在设置<code>rules</code>时只需要<code>use:&#39;vue-loader&#39;</code>即可。</p>
+</li>
+<li>要想使用vue-loader还需要在配置文件中引入插件，这个插件就在<code>vue-loader</code>里面，需要加载到配置文件中：<code>const VueLoaderPlugin = require(&#39;vue-loader/lib/plugin&#39;)</code>,然后再<code>new</code>一个<code>VueLoaderPlugin</code>的对象实例，放到<code>plugins</code>中去。</li>
+<li>将我们创建的<code>.vue</code>结尾的组件文件使用<code>import</code>导入到入口文件中。</li>
+<li>使用<code>render</code>函数渲染组件。</li>
+</ol>
+<h3 id="导入与导出成员"><a href="#导入与导出成员" class="headerlink" title="导入与导出成员"></a>导入与导出成员</h3><p>在ES6中为我们提供了导入与导出成员的方法。</p>
+<ol>
+<li>导入成员使用<code>import 名称 form 文件地址</code>，当在我们的入口文件中碰到这一行代码时，会自动加载并且执行文件地址所指向的文件中的代码，如果我们需要在代码执行完毕之后接受这个文件导出的成员，那么就可以在import后面带上一个任意变量名称，这个变量名称就会接受文件导出的成员，如果不需要接受文件导出的成员，那么可以不加变量名称。这样就只是单纯的执行文件中的代码。</li>
+<li><p>导出成员有两种方式：</p>
+<ul>
+<li><p><code>export default</code> 导出成员</p>
+<ul>
+<li>使用这种方法导出的成员可以使用任意变量来接受。</li>
+<li>在一个模块中<code>export default</code> 只允许向外暴露一次。</li>
+</ul>
+</li>
+<li><p><code>export</code>导出成员</p>
+<ul>
+<li>使用这种方式暴露的成员，只能够使用<code>{ }</code>的形式来接受，这种形式，叫做按需导出。</li>
+<li>这种方式可以导出多个成员，在接受的时候我们想接受那个成员就在<code>{}</code>中添加这个成员导出时的变量名即可。</li>
+<li>在接受成员时必须严格按照导出的时候的名称来接受。</li>
+<li>如果想要更换变量名称那么可以使用<code>as</code>来起别名<code>import preson, {title as header, content} from &#39;./test.js&#39;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="在webpack中使用vue-router"><a href="#在webpack中使用vue-router" class="headerlink" title="在webpack中使用vue-router"></a>在webpack中使用vue-router</h3><ol>
+<li>下载并引入。</li>
+<li>通过<code>Vue.use(VueRouter)</code>手动安装。</li>
+<li>构建组件文件，并引入到页面中。</li>
+<li>创建路由实例，设置路由规则，并挂载到<code>vm</code>实例上去。</li>
+</ol>
+<h3 id="组件中style标签的lang属性和scoped属性"><a href="#组件中style标签的lang属性和scoped属性" class="headerlink" title="组件中style标签的lang属性和scoped属性"></a>组件中style标签的lang属性和scoped属性</h3><ul>
+<li>默认条件下在组件中style标签中设置的是应用于全局的样式。</li>
+<li>给style加上<code>scoped</code>属性之后，就会变成私有样式，只应用于自己这个组件。</li>
+<li>组件中style标签中默认只能写css，如果想使用less或sass需要设置标签的lang属性。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="李成文 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="李成文 Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/02/es6(一)/" rel="next" title="es6(一)">
+                <i class="fa fa-chevron-left"></i> es6(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/03/vue(二)/" rel="prev" title="vue.js(二)">
+                vue.js(二) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="李成文" />
+          <p class="site-author-name" itemprop="name">李成文</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/953950350" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="953950350@qq.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      E-mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在vue中监听数据变化的方法"><span class="nav-number">1.</span> <span class="nav-text">在vue中监听数据变化的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用vue实例的render方法渲染组件"><span class="nav-number">2.</span> <span class="nav-text">使用vue实例的render方法渲染组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在webpack构建的项目中使用vue"><span class="nav-number">3.</span> <span class="nav-text">在webpack构建的项目中使用vue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack中导入vue和普通网页中使用script导入vue的区别"><span class="nav-number">3.1.</span> <span class="nav-text">webpack中导入vue和普通网页中使用script导入vue的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在vue中结合render函数渲染指定的组件到容器中"><span class="nav-number">3.2.</span> <span class="nav-text">在vue中结合render函数渲染指定的组件到容器中</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入与导出成员"><span class="nav-number">4.</span> <span class="nav-text">导入与导出成员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在webpack中使用vue-router"><span class="nav-number">5.</span> <span class="nav-text">在webpack中使用vue-router</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件中style标签的lang属性和scoped属性"><span class="nav-number">6.</span> <span class="nav-text">组件中style标签的lang属性和scoped属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李成文</span>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="http://7u2ss1.com1.z0.glb.clouddn.com/love.js"></script>
+</body>
+</html>

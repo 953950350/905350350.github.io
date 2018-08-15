@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="LCW blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="说明这个系列主要用来记录在做项目中遇到的坑，以及解决方法。 使用vue-cli搭建一个vue项目 在全局安装vue-clinpm install -g @vue/cli 使用vue-cli创建一个新的项目:vue create 项目名称 使用vue-cli创建的项目中默认是没有下载less的需要在项目中下载less和less-loader，然后在webpack.dev.conf.js中修改配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue饿了么项目">
+<meta property="og:url" content="http://yoursite.com/2018/07/18/vue饿了么项目（一）/index.html">
+<meta property="og:site_name" content="LCW blog">
+<meta property="og:description" content="说明这个系列主要用来记录在做项目中遇到的坑，以及解决方法。 使用vue-cli搭建一个vue项目 在全局安装vue-clinpm install -g @vue/cli 使用vue-cli创建一个新的项目:vue create 项目名称 使用vue-cli创建的项目中默认是没有下载less的需要在项目中下载less和less-loader，然后在webpack.dev.conf.js中修改配置">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-23T06:13:09.863Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue饿了么项目">
+<meta name="twitter:description" content="说明这个系列主要用来记录在做项目中遇到的坑，以及解决方法。 使用vue-cli搭建一个vue项目 在全局安装vue-clinpm install -g @vue/cli 使用vue-cli创建一个新的项目:vue create 项目名称 使用vue-cli创建的项目中默认是没有下载less的需要在项目中下载less和less-loader，然后在webpack.dev.conf.js中修改配置">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/18/vue饿了么项目（一）/"/>
+
+
+
+
+
+  <title>vue饿了么项目 | LCW blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://953950350.github.io/" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LCW blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">hello world</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/18/vue饿了么项目（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="李成文">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LCW blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue饿了么项目</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-18T00:00:00+08:00">
+                2018-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-js学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">vue.js学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>这个系列主要用来记录在做项目中遇到的坑，以及解决方法。</p>
+<h2 id="使用vue-cli搭建一个vue项目"><a href="#使用vue-cli搭建一个vue项目" class="headerlink" title="使用vue-cli搭建一个vue项目"></a>使用vue-cli搭建一个vue项目</h2><ol>
+<li>在全局安装vue-cli<code>npm install -g @vue/cli</code></li>
+<li>使用vue-cli创建一个新的项目:<code>vue create 项目名称</code></li>
+<li>使用vue-cli创建的项目中默认是没有下载<code>less</code>的需要在项目中下载<code>less</code>和<code>less-loader</code>，然后在<code>webpack.dev.conf.js</code>中修改配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改前</span></span><br><span class="line"> <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: utils.styleLoaders(&#123; <span class="attr">sourceMap</span>: config.dev.cssSourceMap, <span class="attr">usePostCSS</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 将usePostCss这个属性去掉，即可在项目中使用less</span></span><br><span class="line">  <span class="comment">// 修改后</span></span><br><span class="line">  <span class="built_in">module</span>: &#123;</span><br><span class="line">    rules: utils.styleLoaders(&#123; <span class="attr">sourceMap</span>: config.dev.cssSourceMap&#125;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="在项目中使用json文件中的假数据模拟后台数据"><a href="#在项目中使用json文件中的假数据模拟后台数据" class="headerlink" title="在项目中使用json文件中的假数据模拟后台数据"></a>在项目中使用json文件中的假数据模拟后台数据</h2><ol>
+<li>在<code>webpack.dev.conf.js</code>文件中进行配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入express模块</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="comment">// 加载静态的数据</span></span><br><span class="line"><span class="keyword">var</span> appData = <span class="built_in">require</span>(<span class="string">'../data.json'</span>)</span><br><span class="line"><span class="keyword">var</span> seller = appData.seller</span><br><span class="line"><span class="keyword">var</span> goods = appData.goods</span><br><span class="line"><span class="keyword">var</span> ratings = appData.ratings</span><br><span class="line"><span class="keyword">var</span> apiRouters = express.Router()</span><br><span class="line">app.use(<span class="string">'/api'</span>, apiRouters)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在devServer对象中配置路由接口，为devServer添加以下属性</span></span><br><span class="line">before(app) &#123;</span><br><span class="line">      app.get(<span class="string">'/api/seller'</span>, (req, res) =&gt; &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          errno: <span class="number">0</span>,</span><br><span class="line">          data: seller</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;),</span><br><span class="line">      app.get(<span class="string">'/api/goods'</span>, (req, res) =&gt; &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          errno: <span class="number">0</span>,</span><br><span class="line">          data: goods</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;),</span><br><span class="line">      app.get(<span class="string">'/api/ratings'</span>, (req, res) =&gt; &#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          errno: <span class="number">0</span>,</span><br><span class="line">          data: ratings</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="移动端1像素边框的实现"><a href="#移动端1像素边框的实现" class="headerlink" title="移动端1像素边框的实现"></a>移动端1像素边框的实现</h2><h3 id="产生原因："><a href="#产生原因：" class="headerlink" title="产生原因："></a>产生原因：</h3><p>由于手机的Retine屏的分辨率与普通屏幕分辨率不同，所以在设置1px边框时很可能会出现边框大于1px的现象。</p>
+<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><p>移动端1px像素解决方法各大主流网站都各有不同，这里我使用伪类来创建1px的线条，然后通过媒体查询，根据不同设备的<code>devicePixelRatio</code>来实现不同比例的缩放，从而使线条接近1px。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.border-1px</span>(<span class="variable">@color</span>) &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="selector-tag">&amp;</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">border-top</span>: <span class="number">1px</span> solid <span class="variable">@color</span>;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">''</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">-webkit-min-device-pixel-ratio</span>: <span class="number">1.5</span>),(<span class="attribute">min-device-pixel-ratio</span>: <span class="number">1.5</span>) &#123;</span><br><span class="line">  <span class="selector-class">.border-1px</span> &#123;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">-webkit-transform</span>: scaleY(<span class="number">0.7</span>);</span><br><span class="line">      <span class="attribute">transform</span>: scaleY(<span class="number">0.7</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">-webkit-min-device-pixel-ratio</span>: <span class="number">2</span>),(<span class="attribute">min-device-pixel-ratio</span>: <span class="number">2</span>) &#123;</span><br><span class="line">  <span class="selector-class">.border-1px</span> &#123;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">      <span class="attribute">-webkit-transform</span>: scaleY(<span class="number">0.5</span>);</span><br><span class="line">      <span class="attribute">transform</span>: scaleY(<span class="number">0.5</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实现Sticky-footers"><a href="#实现Sticky-footers" class="headerlink" title="实现Sticky footers"></a>实现Sticky footers</h2><p>Sticky footers是css页面布局十分常见的一个效果，当我们需要在底部固定一个内容，当页面内容不够时，底部内容被固定到底部，而当页面内容比较多超过了整个屏幕的大小时，底部固定内容要跟着往下走，而不遮挡到上面的内容，这个布局使用fixed布局无法做到</p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><h4 id="html部分"><a href="#html部分" class="headerlink" title="html部分"></a>html部分</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"detail"</span> <span class="attr">v-show</span>=<span class="string">"detailShow"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"detail-wrapper clearfix"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"detail-main"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"detail-close"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"icon-close"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="css部分"><a href="#css部分" class="headerlink" title="css部分"></a>css部分</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.detail</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: fixed;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">100</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(7, 17, 27, 0.8);</span><br><span class="line">    .detail-wrapper &#123;</span><br><span class="line">        <span class="selector-tag">min-height</span>: 100%;</span><br><span class="line">        <span class="selector-class">.detail-main</span> &#123;</span><br><span class="line">            <span class="attribute">margin-top</span>:  <span class="number">64px</span>;</span><br><span class="line">            <span class="attribute">padding-bottom</span>: <span class="number">64px</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.detail-close</span> &#123;</span><br><span class="line">        <span class="attribute">position</span>: relative;</span><br><span class="line">        <span class="attribute">width</span>: <span class="number">32px</span>;</span><br><span class="line">        <span class="attribute">height</span>: <span class="number">32px</span>;</span><br><span class="line">        <span class="attribute">margin</span>: -<span class="number">64px</span> auto <span class="number">0</span> auto;</span><br><span class="line">        <span class="attribute">clear</span>: both;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">32px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>首先<code>detail-wrapper</code>盒子是保证盒子最小要能够占满屏幕，这样才能够把<code>detail-close</code>挤到底部去</li>
+<li><code>detail-main</code>中的<code>margin</code>是根据项目实际情况决定的，可以不需要，而<code>padding-bottom</code>则是为了当内容超过一个屏幕的时候，内容不会覆盖到底部内容。</li>
+<li>最后为<code>detail-close</code>设置负的<code>margin-top</code>则是将这个盒子定位到<code>detail-wrapper</code>中去，在页面内容不够长的时候，让脚部区域在固定的位置展示。</li>
+</ol>
+<h2 id="关于vue中dom以及一些异步操作所带来的问题"><a href="#关于vue中dom以及一些异步操作所带来的问题" class="headerlink" title="关于vue中dom以及一些异步操作所带来的问题"></a>关于vue中dom以及一些异步操作所带来的问题</h2><blockquote>
+<p>这个坑卡了三个小时，产生的原因是没有考虑到多个异步操作所带来的问题</p>
+</blockquote>
+<ol>
+<li>首先组件中所有的数据都是由ajax异步请求过来的，而我将这个操作定义为了一个方法，然后到<code>created</code>中去执行了这个方法，获取数据。</li>
+<li>然后我使用请求过来的数据来渲染页面，其中有一个部分是通过<code>v-for</code>渲染的。</li>
+<li>在后面操作中发现需要使用到由<code>v-for</code>渲染出来的DOM元素，这个时候我使用<code>ref</code>绑定到这些DOM元素。</li>
+<li>然后在<code>mounted</code>中去操作DOM元素，这个时候发现无法从<code>this.$refs</code>中取到使用<code>v-for</code>渲染出来的DOM，然而在<code>this.$refs</code>对象中是保存了这个DOM元素的，但是当访问这些DOM元素时会发现结果是<code>undefined</code>。期间将操作放到<code>$nextTick</code>函数里面回调也无法取得DOM元素，非常的奇怪。</li>
+<li>经过三个多小时的谷歌，也无法发现问题出在哪里了，最后我把获取DOM元素的操作放到ajax请求数据的函数中去执行时问题解决了，那么问题可能就出现在当我获取DOM元素时没有考虑到获取数据这个异步操作，导致虽然使用了<code>$nextTick</code>任然无法获取到DOM元素，因为这个时候可能数据还没有取到，所以还没有渲染到页面上，也就无法取得DOM元素了。</li>
+</ol>
+<h3 id="问题代码"><a href="#问题代码" class="headerlink" title="问题代码"></a>问题代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取数据的操作</span></span><br><span class="line">created() &#123;</span><br><span class="line">    <span class="keyword">this</span>.getGoods()</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 操作DOM元素的方法</span></span><br><span class="line">mounted() &#123;</span><br><span class="line">    <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>._initScroll()</span><br><span class="line">        <span class="keyword">this</span>._calculateHeight()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="改进之后的代码"><a href="#改进之后的代码" class="headerlink" title="改进之后的代码"></a>改进之后的代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">created() &#123;</span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">'/api/goods'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">        res = res.body</span><br><span class="line">        <span class="keyword">if</span> (res.errno === ERR_OK) &#123;</span><br><span class="line">            <span class="keyword">this</span>.goods = res.data</span><br><span class="line">            <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>._initScroll()</span><br><span class="line">                <span class="keyword">this</span>._calculateHeight()</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##元素宽度自适应设备宽度，且宽高相等的布局</p>
+<p>移动端在进行图片展示的时候，一般大的图片要求是宽度自适应，而且宽度高度相等布局，而由于图片的宽度是由设备大小所决定，我们就无法将宽度高度固定，而如果不对图片容器固定宽高，当网络速度比较慢时，图片会在页面渲染之后才会请求得到，图片请求到之后插入页面时会改变页面的布局，会导致页面抖动。</p>
+<ul>
+<li>解决办法</li>
+</ul>
+<p>给图片的容器设置<code>width:100%</code>然后设置<code>padding-top:100%</code>这样就能保证容器在没有图片时会有一个与宽度相等的高度。里面的图片元素设置绝对定位，就能够保证图片脱离文档流，不受容器的<code>padding</code>的影响。</p>
+<h2 id="购物车小球动画和添加商品的cartcontrol组件"><a href="#购物车小球动画和添加商品的cartcontrol组件" class="headerlink" title="购物车小球动画和添加商品的cartcontrol组件"></a>购物车小球动画和添加商品的cartcontrol组件</h2><p>这一个部分是整个项目中最难的一个部分，由于项目比较简单所以没有使用<code>vuex</code>,也就导致了兄弟组件之间通信比较麻烦。</p>
+<h3 id="小球动画的原理"><a href="#小球动画的原理" class="headerlink" title="小球动画的原理"></a>小球动画的原理</h3><ol>
+<li>首先小球是设计在购物车组件之中的，为了满足点击需求一共设计有5个小球，将5控制5个小球的展示和隐藏以数组的形式存到<code>data</code>当中，然后通过<code>v-for</code>指令生成小球。并且在<code>data</code>中定义一个空数组<code>dropBalls</code>用来存放下落的小球。</li>
+<li>当点击添加商品的按钮时，小球就会从添加按钮中运动到购物车中，而由于小球一开始是在购物车中的，那么在点击的时候就需要将小球移动到点击按钮中，然后通过过渡让小球从按钮上移动回到购物车里。</li>
+<li>由于每个商品中都有一个添加按钮，那么我们就需要在点击按钮时动态获取当前点击按钮的位置，通过这个位置计算出小球应该移动的距离。</li>
+<li>而问题的关键在于按钮组件与购物车组件是兄弟组件，它们的父组件是商品页面的<code>goods</code>组件。我们就需要解决如何将按钮组件中的按钮的位置传递给购物车组件。</li>
+</ol>
+<h3 id="将按钮组件的位置传递给购物车组件"><a href="#将按钮组件的位置传递给购物车组件" class="headerlink" title="将按钮组件的位置传递给购物车组件"></a>将按钮组件的位置传递给购物车组件</h3><p>兄弟组件之间无法直接通信，所以解决办法是，利用一个中间组件——父组件，来间接的实现通信。</p>
+<ol>
+<li>从<code>cartcontrol</code>组件中将添加按钮的dom对象传递给父组件。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在goods组件中定义方法,并传递给cartcontrol组件，获取点击时cartcontrol中添加按钮的dom对象</span></span><br><span class="line">addFood(target) &#123;</span><br><span class="line">    <span class="keyword">this</span>._drop(target)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在点击添加按钮时在cartcontrol中执行父组件传递过来的方法，并将事件对象，也就是添加按钮的dom对象传递给父组件</span></span><br><span class="line">addCart(event) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.food.count) &#123;</span><br><span class="line">    Vue.set(<span class="keyword">this</span>.food, <span class="string">'count'</span>, <span class="number">1</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.food.count++</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.$emit(<span class="string">'add'</span>, event.target)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>将获取到的按钮对象传递给shopcart组件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这里通过vue的ref属性就可以获取到子组件的对象，也就可以调用子组件中的方法，从而将按钮对象传递给shopcart组件</span></span><br><span class="line">_drop(target) &#123;</span><br><span class="line">    <span class="comment">// 性能优化</span></span><br><span class="line">    <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.$refs.shopcart.drop(target)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 购物车中的drop方法接受到按钮对象之后，遍历小球数据，将按钮对象保存到找到的第一个没有运动的小球中，并将这个小球对象添加到正在下落的小球数组dropBalls中。</span></span><br><span class="line">drop(el) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.balls.length; i++) &#123;</span><br><span class="line">    <span class="keyword">let</span> ball = <span class="keyword">this</span>.balls[i]</span><br><span class="line">    <span class="keyword">if</span> (!ball.show) &#123;</span><br><span class="line">      ball.show = <span class="literal">true</span></span><br><span class="line">      ball.el = el</span><br><span class="line">      <span class="keyword">this</span>.dropBalls.push(ball)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="利用transition来实现小球动画"><a href="#利用transition来实现小球动画" class="headerlink" title="利用transition来实现小球动画"></a>利用transition来实现小球动画</h3><p>小球的动画我们通过vue提供的transition的钩子函数来控制小球的动画。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找到显示的小球，然后将这个小球移动到目标位置</span></span><br><span class="line">beforeDrop(el) &#123;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="keyword">this</span>.balls.length</span><br><span class="line">  <span class="keyword">while</span> (count--) &#123;</span><br><span class="line">    <span class="keyword">let</span> ball = <span class="keyword">this</span>.balls[count]</span><br><span class="line">    <span class="keyword">if</span> (ball.show) &#123;</span><br><span class="line">      <span class="keyword">let</span> rect = ball.el.getBoundingClientRect()</span><br><span class="line">      <span class="keyword">let</span> x = rect.left - <span class="number">32</span></span><br><span class="line">      <span class="keyword">let</span> y = -(<span class="built_in">window</span>.innerHeight - rect.top - <span class="number">22</span>)</span><br><span class="line">      el.style.display = <span class="string">''</span></span><br><span class="line">      el.style.webkitTransform = <span class="string">`translate3d(0,<span class="subst">$&#123;y&#125;</span>px,0)`</span></span><br><span class="line">      el.style.transform = <span class="string">`translate3d(0,<span class="subst">$&#123;y&#125;</span>px,0)`</span></span><br><span class="line">      <span class="keyword">let</span> inner = el.getElementsByClassName(<span class="string">'inner-hook'</span>)[<span class="number">0</span>]</span><br><span class="line">      inner.style.webkitTransform = <span class="string">`translate3d(<span class="subst">$&#123;x&#125;</span>px,0,0)`</span></span><br><span class="line">      inner.style.transform = <span class="string">`translate3d(<span class="subst">$&#123;x&#125;</span>px,0,0)`</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 给小球设置过渡动画</span></span><br><span class="line">dropping(el, done) &#123;</span><br><span class="line">  <span class="comment">/* eslint-disable no-unused-vas */</span></span><br><span class="line">  <span class="comment">// 这里是手动触发浏览器的重排，他会强制刷新队列要求样式修改任务立即执行</span></span><br><span class="line">  <span class="keyword">let</span> rf = el.offsetHeight</span><br><span class="line">  <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    el.style.webkitTransform = <span class="string">'translate3d(0,0,0)'</span></span><br><span class="line">    el.style.transform = <span class="string">'translate3d(0,0,0)'</span></span><br><span class="line">    <span class="keyword">let</span> inner = el.getElementsByClassName(<span class="string">'inner-hook'</span>)[<span class="number">0</span>]</span><br><span class="line">    inner.style.webkitTransform = <span class="string">'translate3d(0,0,0)'</span></span><br><span class="line">    inner.style.transform = <span class="string">'translate3d(0,0,0)'</span></span><br><span class="line">    el.addEventListener(<span class="string">'transitionend'</span>, done)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// 手动将执行完动画的小球隐藏，这里注意，由于在取的时候我们是从后往前找显示的小球，而dropBalls是push方法将显示小球添加的，所以执行完动画的小球应该是dropBalls数组中的第一个，使用shift方法把它从dropBalls数组中删除，并隐藏它。</span></span><br><span class="line">afterDrop(el) &#123;</span><br><span class="line">  <span class="keyword">let</span> ball = <span class="keyword">this</span>.dropBalls.shift()</span><br><span class="line">  <span class="keyword">if</span> (ball) &#123;</span><br><span class="line">    ball.show = <span class="literal">false</span></span><br><span class="line">    el.style.display = <span class="string">'none'</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="商品页面的商品购买价格计算以及购买商品的数量的展示"><a href="#商品页面的商品购买价格计算以及购买商品的数量的展示" class="headerlink" title="商品页面的商品购买价格计算以及购买商品的数量的展示"></a>商品页面的商品购买价格计算以及购买商品的数量的展示</h2><p>这个部份充分发挥了vue以数据驱动视图的特性，能充分感受到mvvm框架在数据操作上的优势。这里主要涉及到单个商品的数量，以及所有购买商品的数量，还有所有商品的总价，在多个组件之间的联合展示。这里的组件结构是一个父组件<code>goods</code>子组件有<code>cartcontrol shopcart food</code>这三个组件。</p>
+<h3 id="整体的业务需求"><a href="#整体的业务需求" class="headerlink" title="整体的业务需求"></a>整体的业务需求</h3><ol>
+<li>在商品页面展示所有商品列表，每个商品都有一个添加商品的按钮，当每个商品购买数量多于0个时，就会在添加按钮旁边显示购买数量。</li>
+<li>当商品的购买数量不为0是购物车就会显示商品数量的总和，以及商品的总价，当切换到单个商品详情页<code>food</code>组件时，这些状态都不会改变。</li>
+</ol>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ol>
+<li>添加商品</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在cartcontrol组件中，点击添加商品按钮的事件，判断商品对象中是否有count属性，如果没有则添加这个属性并将它的值设置为1，如果有则count数量+1</span></span><br><span class="line">addCart(event) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.food.count) &#123;</span><br><span class="line">    Vue.set(<span class="keyword">this</span>.food, <span class="string">'count'</span>, <span class="number">1</span>)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">this</span>.food.count++</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>.$emit(<span class="string">'add'</span>, event.target)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>计算选中商品的数量</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在goods组件中定义一个计算属性，来储存被选中的商品。</span></span><br><span class="line">selectFoods() &#123;</span><br><span class="line">    <span class="keyword">let</span> result = []</span><br><span class="line">    <span class="keyword">this</span>.goods.forEach(<span class="function">(<span class="params">good</span>) =&gt;</span> &#123;</span><br><span class="line">        good.foods.forEach(<span class="function">(<span class="params">food</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (food.count &amp;&amp; food.count &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                result.push(food)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+<p>然后通过selectFoods中被选中商品的对象就可以计算出被选中商品的数量，以及商品的总价了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>打赏</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="李成文 WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="李成文 Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div
+      
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/14/vue.js(六)/" rel="next" title="vue.js(六)">
+                <i class="fa fa-chevron-left"></i> vue.js(六)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/23/作用域/" rel="prev" title="作用域">
+                作用域 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="李成文" />
+          <p class="site-author-name" itemprop="name">李成文</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/953950350" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="953950350@qq.com" target="_blank" title="E-mail">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                    
+                      E-mail
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用vue-cli搭建一个vue项目"><span class="nav-number">2.</span> <span class="nav-text">使用vue-cli搭建一个vue项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在项目中使用json文件中的假数据模拟后台数据"><span class="nav-number">3.</span> <span class="nav-text">在项目中使用json文件中的假数据模拟后台数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端1像素边框的实现"><span class="nav-number">4.</span> <span class="nav-text">移动端1像素边框的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#产生原因："><span class="nav-number">4.1.</span> <span class="nav-text">产生原因：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案："><span class="nav-number">4.2.</span> <span class="nav-text">解决方案：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现Sticky-footers"><span class="nav-number">5.</span> <span class="nav-text">实现Sticky footers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现"><span class="nav-number">5.1.</span> <span class="nav-text">具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#html部分"><span class="nav-number">5.1.1.</span> <span class="nav-text">html部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#css部分"><span class="nav-number">5.1.2.</span> <span class="nav-text">css部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于vue中dom以及一些异步操作所带来的问题"><span class="nav-number">6.</span> <span class="nav-text">关于vue中dom以及一些异步操作所带来的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题代码"><span class="nav-number">6.1.</span> <span class="nav-text">问题代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改进之后的代码"><span class="nav-number">6.2.</span> <span class="nav-text">改进之后的代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#购物车小球动画和添加商品的cartcontrol组件"><span class="nav-number">7.</span> <span class="nav-text">购物车小球动画和添加商品的cartcontrol组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小球动画的原理"><span class="nav-number">7.1.</span> <span class="nav-text">小球动画的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将按钮组件的位置传递给购物车组件"><span class="nav-number">7.2.</span> <span class="nav-text">将按钮组件的位置传递给购物车组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用transition来实现小球动画"><span class="nav-number">7.3.</span> <span class="nav-text">利用transition来实现小球动画</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#商品页面的商品购买价格计算以及购买商品的数量的展示"><span class="nav-number">8.</span> <span class="nav-text">商品页面的商品购买价格计算以及购买商品的数量的展示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#整体的业务需求"><span class="nav-number">8.1.</span> <span class="nav-text">整体的业务需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">8.2.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李成文</span>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+  </script>
+  
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="http://7u2ss1.com1.z0.glb.clouddn.com/love.js"></script>
+</body>
+</html>
